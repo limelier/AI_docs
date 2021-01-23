@@ -1,6 +1,6 @@
 <style>
 table {
-    margin: auto;
+    margin: 0 auto;
 }
 
 td {

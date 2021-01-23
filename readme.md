@@ -1,1 +1,1 @@
-this stuff will *not* render properly in the browser, use the pdfs
+the markdown will not render properly due to the latex equations, use the html files
