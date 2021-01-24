@@ -60,7 +60,7 @@ $$E_i = \frac{1}{2}(y_{di} - y{i})^2$$
 - the error for the entire training set:
 $$E = \frac{1}{n}\sum_{i=1}^{n}{E_i}$$
 - the delta rule ($f$ is the derivable activation function):
-$$\Delta_iw_j = \alpha \cdot x_{ij} \cdot f'(y_i)$$
+$$\Delta_iw_j = \alpha \cdot x_{ij} \cdot f'(y_i) \cdot e_i$$
     - the linear activation function derives to $1$: $f'(y_i)$ = 1
     - therefore, ultimately this is the same weight change as the perceptron: $\Delta w_j = \alpha x_{ij} e_i$
 
