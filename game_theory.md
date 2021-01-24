@@ -129,9 +129,9 @@ td {
   - for every outcome, there is a numeric **payoff** for each player
 - these elements can be represented by a *payoff matrix*, as seen below
 
-### famous example: prisonier's dillema
-- 2 agents: 2 detained people
-- both have the same strategies: confess to the crime, or deny involvement
+### famous example: prisoner's dillema
+- 2 prisoners (suspects?)
+- both have the same available strategies: confess to the crime, or deny involvement
 - the agents choose their actions simultaneously, without knowing what the other agent is going to choose
 - outcome: years of prison time
 - payoff: less years $\rightarrow$ bigger payoff
@@ -283,3 +283,270 @@ td {
         <td>{ -3, -3 }</td>
     </tr>
 </table>
+
+### mixed Nash equilibrium
+
+- sometimes a pure nash equilibrium does not exist
+- example: the welfare game (Government, Pauper)
+
+<table>
+    <tr>
+        <td class="blank" ></td>
+        <td class="agent2">do work</td>
+        <td class="agent2">be idle</td>
+    </tr>
+    <tr>
+        <td class="agent1">aid</td>
+        <td>{ 3, 2</td>
+        <td>-1, 3 }</td>
+    </tr>
+    <tr>
+        <td class="agent1">don't aid</td>
+        <td>-1, 1 }</td>
+        <td>{ 0, 0</td>
+    </tr>
+</table>
+
+- none of the cells work as a NE:
+  - (aid, do work) - pauper prefers *be idle*
+  - (aid, be idle) - govt prefers *don't aid*
+  - (don't aid, be idle) - pauper prefers *do work*
+  - (don't aid, do work) - govt prefers *aid*
+
+- mixed strategies:
+  - in a pure strategy, player $i$ picks strategy $s_{ij}$ from set $S_i$
+  - in a mixed strategy, player $i$ picks strategy $s_{ij}$ with probability $p_{ij}$
+  - every pure strategy is a mixed strategy too, just with probabilities $p_{ij} = 1$ and $p_{ij'} = 0, \forall j' \ne j$
+  - a finite game always has either a *pure* or a *mixed* nash equilibrium
+  - payoff in mixed strategies is called *expected payoff* - the weighted average payoff of each strategy
+  - how do you interpret mixed strategies?
+    - games where you can employ multiple strategies simultaneously (betting on more than one horse)
+    - multiple instances of the same game (do this x% of the time)
+    - infinite instances of the same game
+    - estimating a player's decision for a single game
+- the **oddment method**
+  - a simple way to compute mixed NE
+  - N/A if the game has a pure NE 
+
+<table>
+    <tr>
+        <td class="blank" ></td>
+        <td class="agent2">do work</td>
+        <td class="agent2">be idle</td>
+    </tr>
+    <tr>
+        <td class="agent1">aid</td>
+        <td>3, 2</td>
+        <td>-1, 3</td>
+    </tr>
+    <tr>
+        <td class="agent1">don't aid</td>
+        <td>-1, 1</td>
+        <td>0, 0</td>
+    </tr>
+</table>
+
+- government payoffs: $
+  \begin{bmatrix}
+  3 & -1 \\
+  -1 & 0 \\
+  \end{bmatrix}
+  $ - used for pauper strategy
+  - $3-(-1)=4 \Rightarrow$ *work* with probability $\frac{4}{|-1|+4} = 0.8$
+  - $-1-0=-1 \Rightarrow$ *be idle* with probability $\frac{|-1|}{|-1|+4} = 0.2$
+  - if the pauper chooses to *work* with prob. $0.2$, the govt will get the same payoff from *aid* and *don't aid*
+
+- pauper payoffs: $
+  \begin{bmatrix}
+  2 & 3 \\
+  1 & 0 \\
+  \end{bmatrix}
+  $ - used for govt strategy
+  - $2-3 = -1 \Rightarrow$ *aid with* probability $\frac{|-1|}{|-1|+1} = 0.5$
+  - $1-0 = 1 \Rightarrow$ *don't aid* with probability $\frac{1}{|-1|+1} = 0.5$
+  - if the govt chooses *aid* with prob 0.5, the pauper will get the same payoff from *do work* or *be idle*
+- for the probabilities $(0.5, 0.5)$ and $(0.2, 0.8)$, both the govt and the pauper have equal expected payoffs for both actions, which allows a **nash equilibrium**
+- more intuitive method: equations
+  - let govt have probabilities $(x, 1-x)$ and pauper have $(y, 1-y)$
+  - attempt to produce equal payouts between all available strategies for the *other player*
+  - for govt: 
+  $$
+  \begin{aligned}
+  2x + 1(1-x) &= 3x + 0(1-x) \\ 
+  (-1)x+1(1-x) &= 0 \\ 
+  1-2x &= 0 \\
+  2x &= 1 \\
+  x &= 0.5
+  \end{aligned}
+  $$
+  - for pauper:
+  $$
+  \begin{aligned}
+  3y + (-1)(1-y) &= (-1)y + 0(1-y) \\
+  4y + (-1)(1-y) &= 0 \\
+  5y - 1 &= 0 \\
+  5y &= 1 \\
+  y &= 0.2
+  \end{aligned}
+  $$
+- if a player leaves the equilibrium strategy, the opponent can take advantage to gain more than they would at equilibrium
+
+### pareto optimality
+- an outcome is **Pareto optimal** if it cannot be improved for anyone without harming someone
+- an outcome $O_1$ **dominates** $O_2$ iff:
+  - $\forall i, O_1(i) \ge O_2(i)$
+  - $\exists i, O_1(i) \gt O_2(i)$
+- the non-dominated outcomes are pareto optimal
+- for a strategy game, a *pareto optimal state* means the players do not have the motivation to deviate *in a coalition*
+- example: prisoner's dillema
+<table>
+    <tr>
+        <td class="blank" ></td>
+        <td class="agent2">deny</td>
+        <td class="agent2">confess</td>
+    </tr>
+    <tr>
+        <td class="agent1">deny</td>
+        <td>-1, -1</td>
+        <td>-5, 0</td>
+    </tr>
+    <tr>
+        <td class="agent1">confess</td>
+        <td>0, -5</td>
+        <td>-3, -3</td>
+    </tr>
+</table>
+
+- $(-1, -1)$ dominates $(-3, -3)$, players will want to deviate from the latter to the former
+- $(0, -5)$ and $(-5, 0)$ are not dominated, one player cannot deviate from them without causing the other a disadvantage
+- all situations except (*confess*, *confess*) are pareto optimal: no prisoner can do less prison time without the other doing more
+
+## two-player cooperative games
+- previously: agents were rational and selfish
+- by cooperating, agents can obtain a greater total payoff (maximum sum of payoffs)
+- example: blue (Renault) and red (Peugeot)
+
+<table>
+    <tr>
+        <td class="blank" ></td>
+        <td class="agent2">F</td>
+        <td class="agent2">M</td>
+    </tr>
+    <tr>
+        <td class="agent1">F</td>
+        <td>-10, -40</td>
+        <td>40, 10</td>
+    </tr>
+    <tr>
+        <td class="agent1">M</td>
+        <td>10, 40</td>
+        <td>-40, -10</td>
+    </tr>
+</table>
+
+- **sum matrix**: $R + P = \begin{bmatrix}-50 & 50 \\ 50 & -50 \end{bmatrix}$
+  - total payoff: $\max(R+P) = 50$
+- **threat matrix**: $R - P = \begin{bmatrix}30 & 30 \\ -30 & -30\end{bmatrix}$
+  - Renault will *always* gain more than Peugeot by picking $F$
+  - i have *no* idea what a "threat differential" is but
+  - i assume that it's the value of the dominant strategy equilibrium's cell for treating the threat matrix as a 0-sum game
+- play whatever strategy gives the right total payoff, settle the difference after the game if needed
+  - either play (F, M) and have nothing to settle (50 total, Renault gets 30 more than Peugeot)
+  - or play (M, F) and settle after (50 total, Peugeot gets 30 more than Renault, P pays R 30 units)
+
+## N-player cooperative games
+### representing the game in characteristic form
+- $n$ agents, $P_1, P_2, ..., P_n$
+- the **grand coalition** is the entire set of agents, $G = {P_1, ..., P_n}$
+- a **coalition** is a non-empty subset of $G$ (a team of one or more players)
+- each coalition tries to maximize its payoff
+- the *value* of each coalition (the $v$ characteristic function) is its max payoff
+- **superadditive game**: $v(S \cup T) \ge v(S) + v(T)$, where $S, T$ coalitions with no agents in common
+- an **imputation** is a set of payoffs $(x_1, ..., x_n)$ s.t.:
+  - the sum of payoffs is equal to the value of the grand coalition
+  $$\sum_{i=1}^nxi = v(G)$$
+  - each agent gets a payoff at least as good as if it was working alone
+  $$x_i \ge v(\{P_i\})$$
+  - an imputation is both efficient and individually rational
+- example: 
+  - agents: $P_1$, $P_2$, $P_3$
+  - each chooses heads ($H$) or tails ($T$)
+  - if all agents play the same side, nothing happens
+  - if two agents pick the same thing and the third picks different, he pays both 1
+  - $v({P_1, P_2, P_3} = 0)$ - zero-sum game
+  - the coalition $S = {P_2, P_3}$ forms
+  - the counter-coalition is $S^c = {P_1}$
+  - thus, zero-sum game with the matrix:
+<table>
+    <tr>
+        <td class="blank" ></td>
+        <td class="agent2">HH</td>
+        <td class="agent2">HT</td>
+        <td class="agent2">TH</td>
+        <td class="agent2">TT</td>
+    </tr>
+    <tr>
+        <td class="agent1">H</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+        <td>-2</td>
+    </tr>
+    <tr>
+        <td class="agent1">T</td>
+        <td>-2</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+    </tr>
+</table>
+
+- continuing:
+  - $S$ will never choose $HT$ or $TH$ (these are dominated)
+  - the value of the game is a $-1$ mixed equilibrium
+    - $S^c$ expects to lose 1
+    - $S$ expects to gain 1
+  - due to the symmetry of the game, the value function is:
+    - $v(\{P_1\}) = v(\{P_2\}) = v(\{P_3\}) = -1$
+    - $v(\{P_1, P_2\}) = v(\{P_2, P_3\}) = v(\{P_1, P_3\}) = 1$
+    - $v(\{P_1, P_2, P_3\}) = 0$
+  - imputations: any $(x_1, x_2, x_3)$, as long as $x_i \ge -1$ and $x_1 + x_2 + x_3 = 0$
+
+### the core
+the core of an $n$-agent game is the set of **non-dominated imputations**
+
+- the core of a game with $v$ is the set of imputations $x = (x_1, x_2, ..., x_n)$ s.t. for any coalition $S = \{P_{i1}, P_{i2}, ..., P_{im}\}$ we have $x_{i1} + ... + x_{im} \ge v(S)$
+  - any coalition ends up getting at least as much as its value
+- any imputation in the core can be viewed as a game solution
+- the core is stable
+- if an imputation is not in the core, there's at least one coalition getting less than its value - these agents will prefer another imputation
+- zero-sum games have an empty core (the game is unstable)
+
+### the Shapley value
+- the core offers a set of solutions for a game
+- what if the game doesn't have a core?
+- probably the friendliest expression for the shapley value:
+$$\phi(i) = \frac{1}{n!}\sum_{i\in S}(|S|-1)!(n - |S|)!(v(S) - v(S-\{i\}))$$
+- the shapley value always exists, is unique, and is feasible (the sum of the payoffs is maximum)
+- it may not belong in the game's core
+  - if it does not, it is *unstable*
+
+### convex games
+a game is **convex** if its characteristic function ($v$) is *supermodular*:
+$$v(S \cup \{i\}) - v(S) \le v(T \cup {i}) - v(T), \forall S \subseteq T \subseteq N - \{i\}, \forall i \in N$$
+- in a nutshell, apparently, the motivation to join a coalition (the possible payoff) grows as the coalition grows
+- any convex game is *superadditive*
+- the core of a convex game is always *non-empty*, and the shapley value belongs to the core, at its *center of gravity*
+
+### conclusions
+- a finite strategic game always has at least one pure or mixed nash equilibrium
+- an outcome is pareto optimal if it can't get better for someone without getting worse for someone else
+- in a nash equilibrium, agents aren't motivated to deviate individually
+- in a pareto optimal state, agents aren't motivated to deviate as a coalition
+- through cooperation, agents can obtain a higher payoff
+  - but how do you split the payoff?
+- the core of an n-player game is the set of non-dominated inputations
+  - and it's stable, i guess
+- the basic idea of the shapley value: each agent should get a payoff corresponding to its marginal contribution to the possible coalitions
+  - sure, it might be impossible to gain something without agent 1 on the team, but he won't get anything alone either, so...
+- this course is a goddamn mess
