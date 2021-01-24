@@ -8,3 +8,6 @@
 
 
 [game theory (long!)](game_theory.html)
+
+
+[neural networks](neural_networks.html)
