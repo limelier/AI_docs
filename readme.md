@@ -7,4 +7,4 @@
 [constraint satisfaction models](constraint_satisfaction_problems.html)
 
 
-[game theory (wip)](game_theory.html)
+[game theory (long!)](game_theory.html)
